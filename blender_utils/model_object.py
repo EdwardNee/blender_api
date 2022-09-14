@@ -10,6 +10,7 @@ class ModelObject(object):
             translation = [0, 0, 0]
         if rotation is None:
             rotation = [1, 0, 0, 0]
+
         self.name = name
         self.translation = translation
         self.rotation = rotation
@@ -25,11 +26,12 @@ def from_JSON_model_obj(string_obj: str) -> ModelObject:
 
 
 class JsonObj(object):
-    def __init__(self, pole_name=None, list_models=None):
+    def __init__(self, obj_id, pole_name=None, list_models=None):
         if list_models is None:
             list_models = []
         if pole_name is None:
             pole_name = ""
+        self.obj_id = obj_id
         self.list_models = list_models
         self.pole_name = pole_name
 
@@ -43,4 +45,4 @@ def from_JSON_listmodels(jsonstr: str) -> JsonObj:
     result = [from_JSON_model_obj(json.dumps(e)) for e in
               jsonobj["list_models"]]
 
-    return JsonObj(jsonobj["pole_name"], result)
+    return JsonObj(jsonobj["obj_id"], jsonobj["pole_name"], result)

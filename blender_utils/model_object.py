@@ -1,14 +1,15 @@
 import json
-from typing import Tuple, List
+from typing import List
 
 
 class ModelObject(object):
-    def __init__(self,
-                 name,
-                 translation: Tuple[float, float, float] = (0, 0, 0),
-                 rotation: Tuple[float, float, float, float] = (0, 0, 0, 0),
-                 scale: Tuple[float, float, float] = (0, 0, 0)
-                 ) -> None:
+    def __init__(self, name, translation=None, rotation=None, scale=None) -> None:
+        if scale is None:
+            scale = [1, 1, 1]
+        if translation is None:
+            translation = [0, 0, 0]
+        if rotation is None:
+            rotation = [1, 0, 0, 0]
         self.name = name
         self.translation = translation
         self.rotation = rotation
@@ -24,17 +25,16 @@ def from_JSON_model_obj(string_obj: str) -> ModelObject:
 
 
 class JsonObj(object):
-    def __init__(self, listOfModels=None):
-        if listOfModels is None:
-            listOfModels = []
-        self.listOfModels = listOfModels
+    def __init__(self, list_models=None):
+        if list_models is None:
+            list_models = []
+        self.list_models = list_models
 
-    def toJSON(self):
-        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True,
-                          indent=4)
+    def toJSON(self) -> str:
+        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
 
 
 def from_JSON_listmodels(jsonstr: str) -> List[ModelObject]:
     jsonobj = json.loads(jsonstr)
-    result = [from_JSON_model_obj(json.dumps(e)) for e in jsonobj["listOfModels"]]
+    result = [from_JSON_model_obj(json.dumps(e)) for e in jsonobj["list_models"]]
     return result

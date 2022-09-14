@@ -22,12 +22,11 @@ def start(list_models: str) -> None:
     remove_object("Cube")
 
 
-if __name__ == '__main__':
+def end(path_to_save: str) -> None:
+    export_scene(path_to_save)
 
-    add_to_scene(
-        "C:\\Users\\niedu\\OneDrive\\Рабочий стол\\Exported\\T-Bases\\T-Base - Square - 17in.glb")
-    add_to_scene(
-        "C:\\Users\\niedu\\OneDrive\\Рабочий стол\\Exported\\T-Bases\\T-Base - Octagonal - 20in.glb")
-    remove_object("Cube")
-    set_translation(is_on_scene("T-Base - Square - 17in"), (5, 5, 0))
-    export_scene("newfileOf")
+
+if __name__ == '__main__':
+    # start(jsonString)
+    # end(pathToFileToExport)
+    pass

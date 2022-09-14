@@ -1,4 +1,4 @@
-from typing import Tuple
+from typing import Tuple, List
 
 import bpy
 from bpy.types import Object
@@ -27,10 +27,11 @@ def is_on_scene(object_name: str) -> Object:
     return obj
 
 
-def set_rotation(obj_scene: Object, rotation: Tuple[float, float, float, float]) -> None:
+def set_rotation(obj_scene: Object, rotation: List[float]) -> None:
     if not obj_scene:
         return
-    obj_scene.rotation = Vector(rotation)
+
+    obj_scene.rotation_euler = Quaternion(rotation).to_euler()
 
 
 def set_translation(obj_scene: Object, position: Tuple[float, float, float]) -> None:

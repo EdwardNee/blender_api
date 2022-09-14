@@ -14,8 +14,7 @@ def process_coordinates(model_object: ModelObject) -> None:
     set_scale(obj, model_object.scale)
 
 
-def start(list_models: str) -> None:
-    model_objects = from_JSON_listmodels(list_models)
+def start(model_objects: List[ModelObject]) -> None:
     for obj in model_objects:
         process_object(obj)
         process_coordinates(obj)
@@ -27,6 +26,8 @@ def end(path_to_save: str) -> None:
 
 
 if __name__ == '__main__':
-    # start(jsonString)
-    # end(pathToFileToExport)
+    list_models = ""  # TODO Json string
+    json_object = from_JSON_listmodels(list_models)
+    start(json_object.list_models)
+    # end(pathToFileToExport + "\\" + json_object.pole_name) #TODO pathToFileToExport dir with exported files
     pass
